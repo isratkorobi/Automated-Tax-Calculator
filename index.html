@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="calculator-wrapper">
+        <h1>The Income Tax Assessment Year (2026-2027)
+        </h1>
+        <div class="category-box">
+            <label class="category-title">
+                <i class="fas fa-user-tie"></i>Tax Payer Category <span class="text-danger">*</span>
+            </label>
+            <div class="radio-options">
+                <label class="custom-radio"><input type="radio" name="taxCategory" value="male"><span
+                        class="radio-checkmark"></span>Male</label>
+                <label class="custom-radio"><input type="radio" name="taxCategory" value="female"><span
+                        class="radio-checkmark"></span>Female</label>
+                <label class="custom-radio"><input type="radio" name="taxCategory" value="disable"><span
+                        class="radio-checkmark"></span>Disable / Third Gender</label>
+                <label class="custom-radio"><input type="radio" name="taxCategory" value="freedom"><span
+                        class="radio-checkmark"></span>Freedom Fighters</label>
+
+            </div>
+        </div>
+        <!------------------------------tax-payer section end-------------------------------------->
+
+        <!------------------------------Automated tax calculation---------------------------------->
+
+        <div class="main-layout">
+            <!-----------------------form-side layout--------------------------->
+            <div class="form-side">
+                <h2>Automated Tax Calculated</h2>
+                <div class="input-row">
+                    <label>Gross Salary with Bonus and Other Benefits (Annual)*</label>
+                    <input type="number" id="grossSalary" value="" placeholder="Enter Annual Amount">
+                </div>
+                <div class="input-row">
+                    <label>Exempted income<br><small>(1/3 of Gross or 5 lac, Whichever Lower)</small></label>
+                    <input type="number" id="exemptedIncome" value="" readonly>
+                </div>
+                <div class="input-row">
+                    <label><b>Total Taxable Income</b></label>
+                    <input type="number" id="taxableIncome" value="" readonly>
+                </div>
+                <div class="input-row">
+                    <label>Allowable Investment<br><small>15% of Taxable Income or Max. 10 Lac</small></label>
+                    <input type="number" id="allowableInvestment" value="0" readonly>
+                </div>
+                <div class="input-row">
+                    <label><b>Actual Investment *</b></label>
+                    <input type="text" id="actualInvestment" value="" placeholder="Click to set" readonly
+                        onclick="openInvestmentModal()" style="cursor: pointer; background-color: #f8f9fa;">
+                </div>
+                <div class="input-row">
+                    <label><b>Total Tax Payable</b></label>
+                    <input type="number" id="totalTaxPayable" value="0" readonly>
+                </div>
+                <div class="input-row">
+                    <label>Less: Tax Rebate</label>
+                    <input type="number" id="taxRebate" value="" readonly>
+                </div>
+                <div class="input-row">
+                    <label><b>Net Tax Payable</b><br><small>Minimum 5,000 BDT (Dhaka & Chittagong City)</small></label>
+                    <input type="number" id="netTaxPayable" value="5000" readonly>
+                </div>
+                <div class="input-row">
+                    <label>Source Tax</label>
+                    <input type="number" id="sourceTax" value="" placeholder="Others Source Tax">
+                </div>
+                <div class="input-row">
+                    <label><b>Tax Payable With Return =</b></label>
+                    <input type="number" id="taxPayableReturn" value="5000" readonly>
+                </div>
+                <div class="input-row flex-end">
+                    <label>Monthly TDS (If Investment)Monthly </label>
+                    <div class="tds-box">
+                        <input type="number" id="monthlyTdsInvest" value="0"><span>BDT</span>
+                    </div>
+                </div>
+                <div class="input-row flex-end">
+                    <label for="">Monthly TDS (Without Investment)</label>
+                    <div class="tds-box">
+                        <input type="number" id="monthlyTdsWithout" value="0"><span>BDT</span>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <button id="pdfBtn">GET PDF ></button>
+                </div>
+            </div>
+            <!--------------------------form-side layout end---------------------------->
+
+            <!----------------------------rules-side layout------------------------>
+            <div class="rules-side">
+                <h3>Tax Slab Rules</h3>
+                <table class="rule-table">
+                    <thead>
+                        <tr>
+                            <th>Slab Amount</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BDT 0 - 375,000 <br><small>(Female/Senior Citizen above 65 years age: 425,000)</small>
+                            </td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>BDT 375,001 - 675,000 [3,00,000]</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>BDT 675,001 - 1075,000 [4,00,000]</td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                BDT 10,75,001 - 15,75,000 [5,00,000]
+                            </td>
+                            <td>
+                                20%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                BDT 15,75,001 - 35,75,000 [20,00,000]
+                            </td>
+                            <td>
+                                25%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                BDT 35,75,001 - UP [Remaining]
+                            </td>
+                            <td>
+                                30%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3 class="mt-20">Rebate Rules</h3>
+                <table class="rule-table">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Rebate Rules Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                a.
+                            </td>
+                            <td>
+                                3% of Taxable Income
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                b.
+                            </td>
+                            <td>15% of Actual Investment</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                c.
+                            </td>
+                            <td>
+                                10 Lac
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <p class="nb-text">NB: (Which is Taken as the Lower Value)</p>
+            </div>
+            <!------------------------rules-side layout end--------------------->
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!--MOdal Element-->
+    <div id="investmentModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Set Actual Investment</h3>
+                <span class="close-btn" id="closeModal">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-row">
+                    <label>Savings Certificate (Upto 5 Lac)</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+                <div class="modal-row">
+                    <label>LIP (Upto 10% of Policy Value)</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+                <div class="modal-row">
+                    <label>DPS (Upto 120,000)</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+                <div class="modal-row">
+                    <label>Share market</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+                <div class="modal-row">
+                    <label>Self & Employer's Contrib. to RPF</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+                <div class="modal-row">
+                    <label>Others</label>
+                    <input type="number" class="inv-input" value="0">
+                </div>
+
+                <hr>
+
+                <div class="modal-row">
+                    <label><b>Total =</b></label>
+                    <input type="number" id="modalTotalAmount" value="0" readonly>
+                </div>
+
+                <div class="yellow-box">
+                    <label><b>Allowable Investment</b> <br><small>15% of Taxable Income & Max. 10 Lac</small></label>
+                    <input type="number" id="modalAllowable" value="0" readonly>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="saveChangesBtn">SAVE CHANGES ></button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
