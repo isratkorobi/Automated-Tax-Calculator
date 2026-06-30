@@ -433,3 +433,57 @@ h3 {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* মোবাইল রেসপন্সিভ করার জন্য আপডেট */
+@media (max-width: 768px) {
+    .container {
+        width: 100% !important;
+        padding: 10px;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        /* পাশাপাশি লেআউট নিচ দিয়ে চলে আসবে */
+        gap: 20px;
+    }
+
+    .form-side,
+    .rules-side {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .input-row {
+        flex-direction: column;
+        /* ইনপুট এবং লেবেল উপরে-নিচে হবে */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .input-row input,
+    .input-row select {
+        width: 100% !important;
+        /* ইনপুট বক্স ফুল উইডথ হবে */
+    }
+
+    .radio-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-box {
+        width: 95% !important;
+        /* মডাল ছোট স্ক্রিনে ফিট হবে */
+        margin: 0 auto;
+    }
+
+    .modal-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal-row input {
+        width: 100% !important;
+        margin-top: 5px;
+    }
+}
