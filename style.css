@@ -436,8 +436,7 @@ h3 {
 
 /* মোবাইল রেসপন্সিভ করার জন্য আপডেট */
 @media (max-width: 768px) {
-    .container {
-        width: 100% !important;
+    .calculator-wrapper {
         padding: 10px;
     }
 
@@ -451,6 +450,7 @@ h3 {
     .rules-side {
         width: 100%;
         padding: 15px;
+        box-sizing: border-box;
     }
 
     .input-row {
@@ -458,17 +458,31 @@ h3 {
         /* ইনপুট এবং লেবেল উপরে-নিচে হবে */
         align-items: flex-start;
         gap: 10px;
+        width: 100%;
+    }
+
+    .input-row label {
+        width: 100%;
     }
 
     .input-row input,
     .input-row select {
         width: 100% !important;
+        box-sizing: border-box;
         /* ইনপুট বক্স ফুল উইডথ হবে */
     }
 
     .radio-options {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .rules-side {
+        overflow-x: auto;
+    }
+
+    .rule-table {
+        overflow-x: auto;
     }
 
     .modal-box {
